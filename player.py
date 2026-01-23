@@ -24,7 +24,7 @@ class Player(CircleShape):
         LINE_WIDTH     # thickness of the outline
 )
     def rotate(self,dt):
-        self.rotation = dt *  PLAYER_TURN_SPEED
+        self.rotation += dt *  PLAYER_TURN_SPEED
     
     def update(self, dt):
         keys = pygame.key.get_pressed()
@@ -34,6 +34,17 @@ class Player(CircleShape):
         if keys[pygame.K_d]:
             self.rotate(dt)
             print(dt)
+        if keys[pygame.K_w]:
+            self.move(dt)
+            print(dt)
+        if keys[pygame.K_s]:
+            self.move(-dt)
+            print(dt)
 
-    def move(self):
-        pass
+
+    def move(self,dt):
+       unit_vector = pygame.Vector2(0, 1)
+       rotated_vector = unit_vector.rotate(self.rotation)
+       rotated_with_speed_vector = rotated_vector * PLAYER_SPEED * dt
+       self.position += rotated_with_speed_vector
+       
