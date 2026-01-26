@@ -1,1 +1,1 @@
-Juego hecho en pyhthon
+Juego hecho en python
