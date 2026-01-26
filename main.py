@@ -19,8 +19,9 @@ def main():
     Shot.containers = (shots,drawable,updatable)
     dt = 0
     p1 = Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2) 
-    a1 = AsteroidField()
+    AsteroidField()
 
+    
 
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -38,6 +39,12 @@ def main():
         for event in pygame.event.get():
              if event.type == pygame.QUIT:
                 return False
+        for obj in asteroids:
+            for sh in shots:
+                if(sh.collides_with(obj)):
+                    log_event("asteroid_shot")
+                    sh.kill()
+                    obj.split(asteroids)
         for obj in asteroids:
             if(obj.collides_with(p1)):
                 log_event("player_hit")
